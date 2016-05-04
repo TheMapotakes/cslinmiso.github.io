@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Start Using Cloudbees | Trey&#39;s Whispering</title>
+  <meta name="author" content="Trey Lin">
+  
+  <meta name="description" content="最近因為女友的需求，做了個系統放在網路上。但又因為是實驗性的系統，於是不想找付費的部屬平台。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Start Using Cloudbees"/>
+  <meta property="og:site_name" content="Trey&#39;s Whispering"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Trey&#39;s Whispering" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53783277-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    //ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Trey&#39;s Whispering</a></h1>
+  <h2 class="subtitle">Life&#39;s too short for you to give in. So fight, you fight for what&#39;s yours.</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-02T12:28:18.000Z"><a href="/2014/08/02/Start-using-Cloudbees/">2014 Aug 02</a></time>
+      
+      
+  
+    <h1 class="title">Start Using Cloudbees</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>　　最近因為女友的需求，做了個系統放在網路上。但又因為是實驗性的系統，於是不想找付費的部屬平台。</p>
+ <a id="more"></a>
+<p>　　所以就開始使用<a href="http://www.cloudbees.com" target="_blank" rel="external">CloudBees</a>，CloudBees的免費帳號可以在2 cells, 256MB的平台設置不同的container，因為平時都是使用glassfish比較多，剛好這邊也有支援。不過應用程式，若是兩小時內沒有人使用，則會進入<strong>冬眠模式</strong>，直到下次請求才會再度被喚醒，耗時約三分鐘。</p>
+<p>　　同時，CloudBees也提供<strong>免費MySQL資料庫(ClearDB 5MB / 10 connections)</strong>，不過只有2x5MB的大小，但算是夠用了。</p>
+<p>　　一開始嫌5MB太小，於是就在<a href="http://www.db4free.net" target="_blank" rel="external">db4free</a>建了個資料庫，雖然速度慢了一點，但是容量可以達到100MB也沒有限制流量。缺點就在於速度實在有點差強人意，於是一陣掙扎之後，還是回來使用<a href="http://www.cloudbees.com" target="_blank" rel="external">CloudBees</a>的DB。</p>
+<p>　　不過今天轉換DB到CloudBees時，設定Hibernate遇到了一個問題。<br>本來以為只需要更換db url跟帳號密碼就好，但是在查詢中文欄位的時候，怎麼查就是查不出來，永遠都是查不到東西。</p>
+<p>　　仔細查了一下，原來MySQL有分兩種資料庫引擎： InnoDB和MyISAM，而CloudBees的ClearDB是預設使用InnoDB，在hibernate.dialect的參數必須使用 <code>org.hibernate.dialect.MySQLInnoDBDialect</code></p>
+<p>　　隨之一改完，重新編譯程式並部署就一切正常了！</p>
+<p>　　但真正疑惑的是，當我使用db4free時，預設的引擎也是InnoDB，而當時我使用的dialect是<code>org.hibernate.dialect.MySQLDialect</code>，很奇怪的卻沒有這個問題…………..</p>
+<p>　　於是在轉換DB時，就接續著用而造成了這個問題。 T_T</p>
+<p>　　以上就是最近用Paas平台遇到的問題，若有興趣可以一起討論！</p>
+<p>##參考網站</p>
+<p><a href="http://log-cd.iteye.com/blog/431281" target="_blank" rel="external">http://log-cd.iteye.com/blog/431281</a></p>
+<p><a href="http://www.cloudbees.com" target="_blank" rel="external">CloudBees</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Cloud/">Cloud</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Cloud/">Cloud</a>, <a href="/tags/CloudBees/">CloudBees</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:cslinmiso.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Cloud/">Cloud</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/Heroku/">Heroku</a><small>1</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/categories/LINE/">LINE</a><small>3</small></li>
+  
+    <li><a href="/categories/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/categories/Travel/">Travel</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/05/04/Google-contact-sync-fix-for-MIUI7/">Google Contact Sync Fix for MIUI7</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/09/Why-you-cant-use-comments-on-Reusable-block/">Why You Can&#39;t Use Comments on Reusable Block</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/16/Heroku-Depolyment-For-Play-Framework/">Heroku-Depolyment-for-Play-Framework</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/26/LINE-API/">LINE_API</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/25/LINE空頭帳號/">LINE空頭帳號</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Cloud/">Cloud</a><small>2</small></li>
+  
+    <li><a href="/tags/CloudBees/">CloudBees</a><small>2</small></li>
+  
+    <li><a href="/tags/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/tags/Google-Contact-Sync/">Google Contact Sync</a><small>1</small></li>
+  
+    <li><a href="/tags/Heroku/">Heroku</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/JetStar/">JetStar</a><small>1</small></li>
+  
+    <li><a href="/tags/LINE/">LINE</a><small>3</small></li>
+  
+    <li><a href="/tags/Lucene/">Lucene</a><small>1</small></li>
+  
+    <li><a href="/tags/MI5/">MI5</a><small>1</small></li>
+  
+    <li><a href="/tags/MIUI/">MIUI</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Osaka/">Osaka</a><small>1</small></li>
+  
+    <li><a href="/tags/Paoding/">Paoding</a><small>1</small></li>
+  
+    <li><a href="/tags/Play-Framework/">Play Framework</a><small>2</small></li>
+  
+    <li><a href="/tags/Travel/">Travel</a><small>1</small></li>
+  
+    <li><a href="/tags/db4free/">db4free</a><small>1</small></li>
+  
+    <li><a href="/tags/小米5/">小米5</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Cloud/" style="font-size: 15px;">Cloud</a> <a href="/tags/CloudBees/" style="font-size: 15px;">CloudBees</a> <a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/Google-Contact-Sync/" style="font-size: 10px;">Google Contact Sync</a> <a href="/tags/Heroku/" style="font-size: 10px;">Heroku</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/JetStar/" style="font-size: 10px;">JetStar</a> <a href="/tags/LINE/" style="font-size: 20px;">LINE</a> <a href="/tags/Lucene/" style="font-size: 10px;">Lucene</a> <a href="/tags/MI5/" style="font-size: 10px;">MI5</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Osaka/" style="font-size: 10px;">Osaka</a> <a href="/tags/Paoding/" style="font-size: 10px;">Paoding</a> <a href="/tags/Play-Framework/" style="font-size: 15px;">Play Framework</a> <a href="/tags/Travel/" style="font-size: 10px;">Travel</a> <a href="/tags/db4free/" style="font-size: 10px;">db4free</a> <a href="/tags/小米5/" style="font-size: 10px;">小米5</a>
+  </div>
+</div>
+
+
+  <div class="widget recent_comments">
+    <h3 class="title">最近評論</h3>
+    <script type="text/javascript" src="http://cslinmiso.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=0&amp;avatar_size=32&amp;excerpt_length=200&amp;hide_mods=0"></script>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Trey Lin
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'cslinmiso';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

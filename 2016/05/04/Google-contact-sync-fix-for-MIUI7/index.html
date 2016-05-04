@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Google Contact Sync Fix for MIUI7 | Trey&#39;s Whispering</title>
+  <meta name="author" content="Trey Lin">
+  
+  <meta name="description" content="如何解決小米5(MIUI 7)無法同步Google聯絡人。
+同事買了小米5後，發現Google 聯絡人無法同步，找了許多方法都沒用。
+包括各種Google安裝器，聯絡人說不同步就是不同步。
+大家都沒辦法了，我咧，最喜歡挑戰這種無聊的事情(？)，所以也來試試看了。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Google Contact Sync Fix for MIUI7"/>
+  <meta property="og:site_name" content="Trey&#39;s Whispering"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Trey&#39;s Whispering" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53783277-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    //ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Trey&#39;s Whispering</a></h1>
+  <h2 class="subtitle">Life&#39;s too short for you to give in. So fight, you fight for what&#39;s yours.</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-05-04T05:59:17.000Z"><a href="/2016/05/04/Google-contact-sync-fix-for-MIUI7/">2016 May 04</a></time>
+      
+      
+  
+    <h1 class="title">Google Contact Sync Fix for MIUI7</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <pre><code>如何解決小米5(MIUI 7)無法同步Google聯絡人。
+</code></pre><p>同事買了小米5後，發現Google 聯絡人無法同步，找了許多方法都沒用。</p>
+<p>包括各種Google安裝器，聯絡人說不同步就是不同步。</p>
+<p>大家都沒辦法了，我咧，最喜歡挑戰這種無聊的事情(？)，所以也來試試看了。</p>
+ <a id="more"></a>
+<h2 id="找問題，先Google"><a href="#找問題，先Google" class="headerlink" title=" 找問題，先Google "></a><strong> 找問題，先Google </strong></h2><p>網路找到的解決方法不外乎，</p>
+<ol>
+<li>要把權限打開，允許Google聯絡人同步讀取通訊錄等等。</li>
+<li>使用Google安裝器重新安裝</li>
+</ol>
+<p>但是，<strong>小米5(MIUI 7)</strong>就是沒用，明明別人說有用的方法就是沒用。</p>
+<p>最後在國外網站找到方法，我重新包裝壓縮，簡單說明如下。</p>
+<h2 id="最終解決方法"><a href="#最終解決方法" class="headerlink" title=" 最終解決方法 "></a><strong> 最終解決方法 </strong></h2><blockquote>
+<p>此方法目前只適用於MIUI7以上版本</p>
+</blockquote>
+<p>下載<a href="https://goo.gl/BvM8C7" target="_blank" rel="external">Google框架安裝檔</a> </p>
+<p>解壓密碼為：<img src="/img/Google-contact-sync-fix-for-MIUI7/PASSWORD4ZIP.png" alt="Password"></p>
+<p>如果之前有裝過Google框架的人，請移除乾淨後再裝。</p>
+<ol>
+<li>解壓後，安裝Google框架等四項app： Google framework, play service, play store and account manager</li>
+</ol>
+<blockquote>
+<p>注意！安裝完成後，都還不要打開Play商店。</p>
+</blockquote>
+<ul>
+<li>com.android.vending_80310011.apk</li>
+<li>com.google.android.gms_6599036.apk</li>
+<li>com.google.android.gsf_17.apk</li>
+<li>com.google.android.gsf.login_17.apk</li>
+</ul>
+<ol>
+<li>接著重要的一步是，<code>重開機</code>！</li>
+</ol>
+<p>重開機後再接續安裝以下兩個App：google contacts sync, google calendar sync</p>
+<ul>
+<li>Google 日曆同步處理功能-com.google.android.syncadapters.calendar-16-v4.1.2-610838.apk</li>
+<li>Google 聯絡人同步處理功能-com.google.android.syncadapters.contacts-19-v4.4.2-940549.apk</li>
+</ul>
+<ol>
+<li>安裝後再<code>重開機</code>！</li>
+</ol>
+<p>開機後，執行Play商店登入帳號。</p>
+<p>這個時候可以打開聯絡人看看聯絡人是否開始同步了。</p>
+<p>若沒有，則要進入 <code>[安全中心] &gt; [權限管理]</code> </p>
+<p>將Google聯絡人同步框架開啟權限。(就都改成打勾勾，允許就是了！)</p>
+<p>若要檢查是否真的有同步成功，除了開啟聯絡人查看外，</p>
+<p>也可以照以下設定：</p>
+<pre><code>[設定] &gt; [其他帳號] &gt; [Google] &gt; [你的google帳號] &gt; 立即同步 
+</code></pre><p>應該會看到聯絡人旁邊的圈圈一直轉，若最後底下更新時間顯示為目前就代表成功了！</p>
+<p>如果還是不行，就重開機並再度檢查權限。</p>
+<p>附上<a href="https://www.youtube.com/watch?v=UgdsvrtFji0" target="_blank" rel="external">Youtube教學</a>，基本上大同小異，只不過我先把聯絡人apk提取出來了而已。</p>
+<h2 id="Solution-for-google-contact-sync-on-XiaoMi-5"><a href="#Solution-for-google-contact-sync-on-XiaoMi-5" class="headerlink" title="Solution for google contact sync on XiaoMi 5"></a>Solution for google contact sync on XiaoMi 5</h2><pre><code>How to install google apps and get google calendar and contacts to sync on XiaoMi 5 (MIUI 7).
+</code></pre><p>First download <a href="https://goo.gl/BvM8C7" target="_blank" rel="external">GAPPS_MIUI_7_RE.zip</a> </p>
+<p>Password：<img src="/img/Google-contact-sync-fix-for-MIUI7/PASSWORD4ZIP.png" alt=""></p>
+<ol>
+<li>Unzip the file, there will be 4 files, the framework, play service, play store and account manager, install all the GAPPS,</li>
+</ol>
+<blockquote>
+<p>Do not launch play store application during installation, even after it’s done.</p>
+</blockquote>
+<ul>
+<li>com.android.vending_80310011.apk</li>
+<li>com.google.android.gms_6599036.apk</li>
+<li>com.google.android.gsf_17.apk</li>
+<li>com.google.android.gsf.login_17.apk</li>
+</ul>
+<ol>
+<li><code>Once you finished installing all of 4 files, reboot your device.</code></li>
+</ol>
+<p>Afterward, start installing google contacts sync and google calendar sync as following file name.</p>
+<ul>
+<li>Google 日曆同步處理功能-com.google.android.syncadapters.calendar-16-v4.1.2-610838.apk</li>
+<li>Google 聯絡人同步處理功能-com.google.android.syncadapters.contacts-19-v4.4.2-940549.apk</li>
+</ul>
+<ol>
+<li>Reboot your phone before you do anything.</li>
+</ol>
+<p>if it still doesn’t work after you reboot your device, launch security center and give permission to google contact sync and check all the items under privacy.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="http://54.243.194.135/thread-269874-1-1.html" target="_blank" rel="external">[Tools, Tips &amp; Tutorials] Mi5 (miui 7) How to install google apps and get yr calendar and contacts to sync</a></p>
+<p><a href="http://tinyurl.com/znd3df8" target="_blank" rel="external">How to Install Google Play Store on Xiaomi Mi5</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Android/">Android</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Android/">Android</a>, <a href="/tags/MIUI/">MIUI</a>, <a href="/tags/MI5/">MI5</a>, <a href="/tags/小米5/">小米5</a>, <a href="/tags/Google-Contact-Sync/">Google Contact Sync</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:cslinmiso.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Cloud/">Cloud</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/Heroku/">Heroku</a><small>1</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/categories/LINE/">LINE</a><small>3</small></li>
+  
+    <li><a href="/categories/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/categories/Travel/">Travel</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/05/04/Google-contact-sync-fix-for-MIUI7/">Google Contact Sync Fix for MIUI7</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/09/Why-you-cant-use-comments-on-Reusable-block/">Why You Can&#39;t Use Comments on Reusable Block</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/16/Heroku-Depolyment-For-Play-Framework/">Heroku-Depolyment-for-Play-Framework</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/26/LINE-API/">LINE_API</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/25/LINE空頭帳號/">LINE空頭帳號</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Cloud/">Cloud</a><small>2</small></li>
+  
+    <li><a href="/tags/CloudBees/">CloudBees</a><small>2</small></li>
+  
+    <li><a href="/tags/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/tags/Google-Contact-Sync/">Google Contact Sync</a><small>1</small></li>
+  
+    <li><a href="/tags/Heroku/">Heroku</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/JetStar/">JetStar</a><small>1</small></li>
+  
+    <li><a href="/tags/LINE/">LINE</a><small>3</small></li>
+  
+    <li><a href="/tags/Lucene/">Lucene</a><small>1</small></li>
+  
+    <li><a href="/tags/MI5/">MI5</a><small>1</small></li>
+  
+    <li><a href="/tags/MIUI/">MIUI</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Osaka/">Osaka</a><small>1</small></li>
+  
+    <li><a href="/tags/Paoding/">Paoding</a><small>1</small></li>
+  
+    <li><a href="/tags/Play-Framework/">Play Framework</a><small>2</small></li>
+  
+    <li><a href="/tags/Travel/">Travel</a><small>1</small></li>
+  
+    <li><a href="/tags/db4free/">db4free</a><small>1</small></li>
+  
+    <li><a href="/tags/小米5/">小米5</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Cloud/" style="font-size: 15px;">Cloud</a> <a href="/tags/CloudBees/" style="font-size: 15px;">CloudBees</a> <a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/Google-Contact-Sync/" style="font-size: 10px;">Google Contact Sync</a> <a href="/tags/Heroku/" style="font-size: 10px;">Heroku</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/JetStar/" style="font-size: 10px;">JetStar</a> <a href="/tags/LINE/" style="font-size: 20px;">LINE</a> <a href="/tags/Lucene/" style="font-size: 10px;">Lucene</a> <a href="/tags/MI5/" style="font-size: 10px;">MI5</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Osaka/" style="font-size: 10px;">Osaka</a> <a href="/tags/Paoding/" style="font-size: 10px;">Paoding</a> <a href="/tags/Play-Framework/" style="font-size: 15px;">Play Framework</a> <a href="/tags/Travel/" style="font-size: 10px;">Travel</a> <a href="/tags/db4free/" style="font-size: 10px;">db4free</a> <a href="/tags/小米5/" style="font-size: 10px;">小米5</a>
+  </div>
+</div>
+
+
+  <div class="widget recent_comments">
+    <h3 class="title">最近評論</h3>
+    <script type="text/javascript" src="http://cslinmiso.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=0&amp;avatar_size=32&amp;excerpt_length=200&amp;hide_mods=0"></script>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Trey Lin
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'cslinmiso';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
