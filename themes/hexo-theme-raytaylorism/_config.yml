@@ -1,0 +1,45 @@
+menu:
+    首頁: /
+    歸檔: /archives
+    分類: javascript:void(0);
+    讀書: /reading
+    關於: /about
+
+menu_icon:
+    首頁: icon-home
+    歸檔: icon-archive
+    分類: icon-archive
+    讀書: icon-book
+    關於: icon-user
+
+menu_class:
+    首頁: menu-home
+    歸檔: menu-archive
+    分類: menu-category
+    讀書: menu-reading
+    關於: menu-about
+
+excerpt_link: Read More
+archive_yearly: true
+
+# widgets:
+#     - category
+
+#weibo_url: http://weibo.com/1956184117
+#renren_url: http://www.renren.com/309069699
+twitter_url: https://twitter.com/cslinmiso
+facebook_url: https://www.facebook.com/trey.lin.7
+github_url: https://github.com/cslinmiso
+#google_plus_url: https://plus.google.com/113216251417550089742?rel=author
+
+blogrolls:
+    - Ray Taylor Lin's Blog: http://raytaylorlin.com/
+
+google_analytics_track_id: UA-43460643-1
+google_analytics_website: http://raytaylorlin.com
+
+# 是否開啟prettify.js美化代碼
+google_code_prettify: true
+# 高亮的主題，若為空則使用默認主題
+google_code_prettify_theme: prettify_raytaylorism
+rss:

@@ -1,0 +1,25 @@
+<div class="navbar inverse-navbar">
+    <div class="navbar-inner">
+        <div class="container-center">
+            <a href="/index.html" class="menu-trigger" data-meteocon="M">
+                <i class="icon-reorder"></i>
+            </a>
+            <div class="nav-collapse navbar-responsive-collapse collapse">
+                <nav id="menu">
+                    <ul class="nav">
+                        <li><a class="brand" id="blog-title" href="/index.html"><%= config.title %></a></li>
+                    </ul>
+                    <div class="pull-right nav" id="nav-button-group">
+                        <% for (var i in theme.menu){ %>
+                            <a href="<%- theme.menu[i] %>" class="<%- theme.menu_class[i] %> btn btn-primary btn-large">
+                                <i class="<%- theme.menu_icon[i] %> icon-white"></i>
+                                <%= i %>
+                            </a>
+                        <% } %>
+                    </div>
+                </nav>
+                <%- partial('side_menu') %>
+            </div>
+        </div>
+    </div>
+</div>

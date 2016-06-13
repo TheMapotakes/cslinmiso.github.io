@@ -1,0 +1,15 @@
+<%- partial('_partial/html_head') %>
+
+<body class="container-fluid">
+    <header id="page-header">
+        <%- partial('_partial/header') %>
+    </header>
+    <div id="content-wrapper">
+        <div class="container-center">
+        <%- body %>
+        </div>
+    </div>
+    <footer id="page-footer"><%- partial('_partial/footer') %></footer>
+    <%- partial('_partial/after_footer') %>
+</body>
+</html>
