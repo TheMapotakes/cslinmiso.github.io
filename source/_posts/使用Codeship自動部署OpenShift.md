@@ -99,3 +99,7 @@ tags:
 
 > 此為翻譯文章，加入了一些個人使用經驗與看法。
 
+
+Reference
+========
+[Deployment-a-openshift-con-codeship](http://juanpabloaj.com/2014/07/23/Deployment-a-openshift-con-codeship/)
