@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Node.js Deployment on Cloudbees | Trey&#39;s Whispering</title>
+  <meta name="author" content="Trey Lin">
+  
+  <meta name="description" content="今天要說一下如何在CloudBees環境中部屬Node.js應用程式。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Node.js Deployment on Cloudbees"/>
+  <meta property="og:site_name" content="Trey&#39;s Whispering"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Trey&#39;s Whispering" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53783277-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    //ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Trey&#39;s Whispering</a></h1>
+  <h2 class="subtitle">Life&#39;s too short for you to give in. So fight, you fight for what&#39;s yours.</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-06T16:09:44.000Z"><a href="/2014/08/06/Nodejs-deployment-on-Cloudbees/">2014 Aug 06</a></time>
+      
+      
+  
+    <h1 class="title">Node.js Deployment on Cloudbees</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天要說一下如何在<a href="http://www.cloudbees.com" target="_blank" rel="noopener">CloudBees</a>環境中部屬<strong>Node.js</strong>應用程式。</p>
+<a id="more"></a>
+<h1 id="新增應用程式"><a href="#新增應用程式" class="headerlink" title="新增應用程式"></a><strong>新增應用程式</strong></h1><p>首先必須先申請 <a href="http://www.cloudbees.com" target="_blank" rel="noopener">CloudBees</a> 的帳號，接著進入<strong>主控台</strong> <a href="https://console.cloudbees.com/" target="_blank" rel="noopener">console.cloudbees.com</a></p>
+<p>點選<strong>Apps</strong>後，按下上方 <strong>Add Application</strong></p>
+<p><img src="/img/Nodejs-deployment-on-Cloudbees/cloudbees-add-app-1.png" alt="Add Application"></p>
+<p>輸入應用程式名稱，<strong>名稱必須全為小寫</strong>。選擇應用程式 <strong>Stack</strong> 為 <strong>Node.js</strong></p>
+<p><img src="/img/Nodejs-deployment-on-Cloudbees/cloudbees-add-app-2.png" alt="Choose Stack as Node.js"></p>
+<p>按下確定後，即可在主控台看見剛剛新增的應用程式。</p>
+<p><img src="/img/Nodejs-deployment-on-Cloudbees/cloudbees-deploy-1.png" alt="Deploy"></p>
+<p>重頭戲來了，開始部署應用程式。</p>
+<h1 id="部署應用程式方式"><a href="#部署應用程式方式" class="headerlink" title="部署應用程式方式"></a><strong>部署應用程式方式</strong></h1><p>這邊有兩種方式部署：</p>
+<ul>
+<li><strong>透過網頁介面上傳</strong> (沒有嘗試過)</li>
+<li><strong>透過CloudBees SDK上傳</strong> (本文將會展示流程)</li>
+</ul>
+<p>根據 <a href="http://developer.cloudbees.com/bin/view/RUN/BeesSDK" target="_blank" rel="noopener">CloudBees SDK</a> 教學文件中，其實已經有詳述如何部署Node.js至平台<a href="https://github.com/CloudBees-community/nodejs-clickstart" target="_blank" rel="noopener">nodejs-clickstart</a>。</p>
+<p>下面部分文章將會取用官方文件並翻譯之。</p>
+<h1 id="透過CloudBees-SDK上傳"><a href="#透過CloudBees-SDK上傳" class="headerlink" title="透過CloudBees SDK上傳"></a><strong>透過CloudBees SDK上傳</strong></h1><p>前置作業當然是要將應用程式包好並<strong>壓縮成ZIP格式</strong>，以下提供我的壓縮檔結構。</p>
+<p><img src="/img/Nodejs-deployment-on-Cloudbees/cloudbees-deploy-2.png" alt="Zip"></p>
+<p>其中要注意的是，<strong><code>package.json</code>, <code>setup</code>以及<code>main.js</code></strong>這三個檔案必須包含在壓縮檔內。<br>(setup shell可以在 <a href="https://github.com/CloudBees-community/nodejs-clickstart" target="_blank" rel="noopener">nodejs-clickstart-Github文件</a> 下載得到)</p>
+<p>簡單來說，CloudBees在伺服器端是透過<code>setup</code>，這個shell來<strong>執行啟動伺服器的動作</strong>。</p>
+<p>而shell內預設執行的js檔名為：<strong><code>main.js</code></strong></p>
+<p>這邊要提到一點，嘗試上傳的過程，我試過不包括node.js的modules就上傳，但是伺服器無法啟動。<br>查看伺服器log提示<strong>無法載入module</strong>，才發現CloudBees不會幫我們安裝module。<br>我還天真地以為他會幫我們根據package.json中的設定到npm下載module。T_T</p>
+<p>於是我的解決方法就把module包在壓縮檔內。</p>
+<p>到這邊前置作業完成，開始部屬。</p>
+<h1 id="開始部屬，終於"><a href="#開始部屬，終於" class="headerlink" title="開始部屬，終於"></a><strong>開始部屬，終於</strong></h1><p>部屬應用程式必須下載<a href="http://cloudbees-downloads.s3.amazonaws.com/sdk/cloudbees-sdk-1.5.2-bin.zip" target="_blank" rel="noopener">CloudBees SDK</a>，下載後解壓得到一個資料夾。<br>執行資料夾內的<strong>Bees Console</strong>。<br><del>說穿了就是個命令提示字元</del>，他…就是個<strong>Console</strong>。</p>
+<p>部屬的完整指令如下：</p>
+<blockquote>
+<p>bees app:deploy -t nodejs target/app.zip</p>
+</blockquote>
+<p>指令說明：<br>若要驅動SDK的指令是<code>bees</code>，而部屬的參數是 <code>app:deploy</code><br><code>-t nodejs</code> 平台將會使用最新版本的Node.js<br>當你設定版本參數： <code>-R</code>, <code>-t</code> 以及 <code>-D</code> 時，只需要設定一次，平台將會記住你的版本選擇。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd sdk  --進入SDK的資料夾</span><br><span class="line">bees app:deploy -t nodejs target/app.zip  --部屬應用程式，程式最好放同一層</span><br></pre></td></tr></table></figure>
+<p>執行指令後，SDK會先開始更新，<strong>接著會要求你輸入帳號密碼以及要部屬的應用程式名稱。</strong></p>
+<p><img src="/img/Nodejs-deployment-on-Cloudbees/cloudbees-deploy-3.png" alt="Console Deployment"></p>
+<p>圖中因為我已經輸入過帳號密碼，於是下次就不必再輸入。<br><strong>紅線框起部分為應用程式名稱</strong>，上次不小心打錯，結果竟然就創了一個<strong>新應用程式</strong>。<br>這點要注意一下，免費用戶只能建立兩個實體。(?)</p>
+<p>看到最後一行，會顯示應用程式名稱以及程式對外網址。</p>
+<p>若要查詢對外網址，也可以在<strong>主控台</strong> <a href="https://console.cloudbees.com/" target="_blank" rel="noopener">console.cloudbees.com</a> 內查看，Location下面的欄位。</p>
+<p><img src="/img/Nodejs-deployment-on-Cloudbees/cloudbees-deploy-1.png" alt="Location"></p>
+<p>若是網頁無法跑出來，代表程式有問題，就必須點選下面的Log頁籤，查看伺服器Log。</p>
+<p>今天就先講到這邊，若有問題或錯誤，請留言發問/指正。</p>
+<h1 id="官方網站"><a href="#官方網站" class="headerlink" title="官方網站"></a><strong>官方網站</strong></h1><p><a href="https://developer.cloudbees.com/bin/view/RUN/NodeJS" target="_blank" rel="noopener">Node.js ClickStack</a></p>
+<p><a href="https://github.com/CloudBees-community/nodejs-clickstart" target="_blank" rel="noopener">nodejs-clickstart-Github文件</a></p>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.</p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Node-js/">Node.js</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Node-js/">Node.js</a>, <a href="/tags/Cloud/">Cloud</a>, <a href="/tags/CloudBees/">CloudBees</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:cslinmiso.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/CI/">CI</a><small>1</small></li>
+  
+    <li><a href="/categories/Cloud/">Cloud</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/Heroku/">Heroku</a><small>1</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/categories/LINE/">LINE</a><small>3</small></li>
+  
+    <li><a href="/categories/Life/">Life</a><small>1</small></li>
+  
+    <li><a href="/categories/Loopback/">Loopback</a><small>1</small></li>
+  
+    <li><a href="/categories/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/categories/PC/">PC</a><small>1</small></li>
+  
+    <li><a href="/categories/Travel/">Travel</a><small>1</small></li>
+  
+    <li><a href="/categories/Vue/">Vue</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2018/02/23/WD-MyBook-8TB-As-Internal-Drive/">WD My Book 8TB as Internal Drive</a>
+      </li>
+    
+      <li>
+        <a href="/2017/10/20/Albothyl/">安可治濃縮液(Albothyl)</a>
+      </li>
+    
+      <li>
+        <a href="/2017/04/12/You2Pick-Youtube-Comment-Picker/">You2Pick-Youtube-Comment-Picker</a>
+      </li>
+    
+      <li>
+        <a href="/2016/08/16/Loopback-Vue-boilerplate/">Loopback-Vue-Boilerplate </a>
+      </li>
+    
+      <li>
+        <a href="/2016/07/25/使用Codeship自動部署OpenShift/">使用Codeship自動部署OpenShift</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/8T/">8T</a><small>1</small></li>
+  
+    <li><a href="/tags/Albothyl/">Albothyl</a><small>1</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/CI/">CI</a><small>1</small></li>
+  
+    <li><a href="/tags/Cloud/">Cloud</a><small>2</small></li>
+  
+    <li><a href="/tags/CloudBees/">CloudBees</a><small>2</small></li>
+  
+    <li><a href="/tags/Codeship/">Codeship</a><small>1</small></li>
+  
+    <li><a href="/tags/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/tags/GIT/">GIT</a><small>1</small></li>
+  
+    <li><a href="/tags/Google-Contact-Sync/">Google Contact Sync</a><small>1</small></li>
+  
+    <li><a href="/tags/Heroku/">Heroku</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Javascript/">Javascript</a><small>2</small></li>
+  
+    <li><a href="/tags/JetStar/">JetStar</a><small>1</small></li>
+  
+    <li><a href="/tags/LINE/">LINE</a><small>3</small></li>
+  
+    <li><a href="/tags/Loopback/">Loopback</a><small>1</small></li>
+  
+    <li><a href="/tags/Lucene/">Lucene</a><small>1</small></li>
+  
+    <li><a href="/tags/MI5/">MI5</a><small>1</small></li>
+  
+    <li><a href="/tags/MIUI/">MIUI</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>3</small></li>
+  
+    <li><a href="/tags/OpenShift/">OpenShift</a><small>1</small></li>
+  
+    <li><a href="/tags/Osaka/">Osaka</a><small>1</small></li>
+  
+    <li><a href="/tags/PC/">PC</a><small>1</small></li>
+  
+    <li><a href="/tags/Paoding/">Paoding</a><small>1</small></li>
+  
+    <li><a href="/tags/Play-Framework/">Play Framework</a><small>2</small></li>
+  
+    <li><a href="/tags/Travel/">Travel</a><small>1</small></li>
+  
+    <li><a href="/tags/Vue/">Vue</a><small>2</small></li>
+  
+    <li><a href="/tags/WD/">WD</a><small>1</small></li>
+  
+    <li><a href="/tags/Webpack/">Webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/Youtube/">Youtube</a><small>1</small></li>
+  
+    <li><a href="/tags/db4free/">db4free</a><small>1</small></li>
+  
+    <li><a href="/tags/harddrive/">harddrive</a><small>1</small></li>
+  
+    <li><a href="/tags/安可治/">安可治</a><small>1</small></li>
+  
+    <li><a href="/tags/小米5/">小米5</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/8T/" style="font-size: 10px;">8T</a> <a href="/tags/Albothyl/" style="font-size: 10px;">Albothyl</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/Cloud/" style="font-size: 15px;">Cloud</a> <a href="/tags/CloudBees/" style="font-size: 15px;">CloudBees</a> <a href="/tags/Codeship/" style="font-size: 10px;">Codeship</a> <a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/Google-Contact-Sync/" style="font-size: 10px;">Google Contact Sync</a> <a href="/tags/Heroku/" style="font-size: 10px;">Heroku</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/JetStar/" style="font-size: 10px;">JetStar</a> <a href="/tags/LINE/" style="font-size: 20px;">LINE</a> <a href="/tags/Loopback/" style="font-size: 10px;">Loopback</a> <a href="/tags/Lucene/" style="font-size: 10px;">Lucene</a> <a href="/tags/MI5/" style="font-size: 10px;">MI5</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Node-js/" style="font-size: 20px;">Node.js</a> <a href="/tags/OpenShift/" style="font-size: 10px;">OpenShift</a> <a href="/tags/Osaka/" style="font-size: 10px;">Osaka</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/Paoding/" style="font-size: 10px;">Paoding</a> <a href="/tags/Play-Framework/" style="font-size: 15px;">Play Framework</a> <a href="/tags/Travel/" style="font-size: 10px;">Travel</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/WD/" style="font-size: 10px;">WD</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Youtube/" style="font-size: 10px;">Youtube</a> <a href="/tags/db4free/" style="font-size: 10px;">db4free</a> <a href="/tags/harddrive/" style="font-size: 10px;">harddrive</a> <a href="/tags/安可治/" style="font-size: 10px;">安可治</a> <a href="/tags/小米5/" style="font-size: 10px;">小米5</a>
+  </div>
+</div>
+
+
+  <div class="widget recent_comments">
+    <h3 class="title">最近評論</h3>
+    <script type="text/javascript" src="http://cslinmiso.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=0&amp;avatar_size=32&amp;excerpt_length=200&amp;hide_mods=0"></script>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 Trey Lin
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'cslinmiso';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
